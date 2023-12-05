@@ -1,0 +1,89 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class details
+{
+    string book_name, author_name, genre, book[30], author[30], gen[30];
+    int count = 0;
+
+public:
+    void get_data();
+    void put_in_file();
+    void show();
+};
+
+void details::get_data()
+{
+    cout << "Enter Name of Book:- ";
+    cin >> book_name;
+    book[count] = book_name;
+    cout << "Enter Author Name:- ";
+    cin >> author_name;
+    author[count] = author_name;
+    cout << "Enter books Genre:- ";
+    cin >> genre;
+    gen[count] = genre;
+    count++;
+}
+
+void details::put_in_file()
+{
+    fstream f;
+    f.open("library.txt", ios::app);
+    f << "\n--------------------------------------------------------------" << endl;
+    f << "\t\t*** List of Books ***\n";
+    f << "--------------------------------------------------------------" << endl;
+
+    f << setw(20) << left << "Book Name" << setw(15) << "Author" << setw(15) << "Genre"
+      << "\n";
+    for (int i = 0; i < count; i++)
+    {
+        f << setw(20) << left << book[i] << setw(15) << author[i] << setw(15) << gen[i] << "\n";
+    }
+    f.close();
+}
+
+void details::show()
+{
+    cout << setw(20) << left << "Book Name" << setw(15) << "Author" << setw(15) << "Genre"
+         << "\n";
+    for (int i = 0; i < count; i++)
+    {
+        cout << setw(20) << left << book[i] << setw(15) << author[i] << setw(15) << gen[i] << "\n";
+    }
+}
+
+int main()
+{
+    details d;
+    int ch;
+    do
+    {
+        cout << "Options:- \n";
+        cout << "1.Add a Book in the library" << endl;
+        cout << "2.Display all the books in the library" << endl;
+        cout << "3.Exit!" << endl;
+        cout << "Enter Your Choice: ";
+        cin >> ch;
+
+        switch (ch)
+        {
+        case 1:
+            d.get_data();
+            d.put_in_file();
+            break;
+        case 2:
+            d.show();
+            break;
+        case 3:
+            cout << "Exit Thank You !" << endl;
+            break;
+
+        default:
+            cout << "Invalid Choice\n";
+            break;
+        }
+    } while (ch != 3);
+
+    return 0;
+}
